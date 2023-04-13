@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Husky pre-commit"
+
+# Check EsLint
+npm run lint ||
+(
+    echo "❌ EsLint Check Failed ❌
+    Make the required changes listed, add changes to stage and try to commit again."
+    false;
+)
+
+#Run End2End test
+npm run test:e2e ||
+(
+    echo "❌ End2End Tests Failed ❌
+    Make the required changes listed, add changes to stage and try to commit again."
+    false;
+)
+
+#Run Component test
+npm run test:e2e ||
+(
+    echo "❌ End2End Tests Failed ❌
+    Make the required changes listed, add changes to stage and try to commit again."
+    false;
+)
